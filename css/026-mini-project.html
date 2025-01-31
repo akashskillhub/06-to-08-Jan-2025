@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .hero {
+            height: calc(100vh - 70px);
+
+            background-image: url("./assets/bg.svg");
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            background-size: cover;
+
+            /* text-align: right; */
+            position: relative;
+        }
+
+        .user {
+            height: calc(100vh - 70px);
+            position: absolute;
+            right: 0;
+        }
+
+        .z-2 {
+            z-index: 2;
+        }
+
+        .lead {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            max-width: 50%;
+        }
+
+        .lead>h1 {
+            color: #FFFFFF;
+            font-size: 3rem;
+        }
+
+        .lead>p {
+            color: gray;
+            font-size: 1.5rem;
+            margin: 30px 0;
+        }
+
+        .lead>button {
+            border: 2px solid coral;
+            padding: 15px 40px;
+            background-color: transparent;
+            color: coral;
+            font-size: 1.5rem;
+            transition: 0.5s;
+        }
+
+        .lead>button:hover {
+            background-color: coral;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .navbar {
+            background-color: coral;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .navbar>a {
+            text-decoration: none;
+            text-transform: capitalize;
+        }
+
+        .skills {
+            display: flex;
+            /* background-color: red; */
+            gap: 50px;
+            margin: 50px 100px;
+        }
+
+        .frontend {
+            flex: 1;
+        }
+
+        .backend {
+            flex: 1;
+        }
+
+        .progress {
+            background-color: gray;
+            margin: 20px 0;
+            border-radius: 50px;
+        }
+
+        .bar {
+            background-color: coral;
+            /* width: 80%; */
+            text-align: center;
+            padding: 10px;
+            border-radius: 50px;
+        }
+
+        .html {
+            width: 80%;
+        }
+
+        .css {
+            width: 60%;
+        }
+
+        .js {
+            width: 50%;
+        }
+
+        .project {
+            margin: 50px 100px;
+            display: flex;
+            gap: 20px
+        }
+
+        .card {
+            border: 2px solid gray;
+            width: 25%;
+        }
+
+        .card>img {
+            max-width: 100%;
+        }
+
+        .body {
+            padding: 20px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css"
+        integrity="sha512-csw0Ma4oXCAgd/d4nTcpoEoz4nYvvnk21a8VA2h2dzhPAvjbUIK6V3si7/g/HehwdunqqW18RwCJKpD7rL67Xg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="hero">
+
+        <div class="lead">
+            <h1>hi my name is john</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe modi aut vitae accusantium aliquam
+                assumenda cum pariatur, debitis illum tempora quos rem minima, veniam asperiores et laborum labore odio
+                quibusdam.
+            </p>
+            <button class="hvr-float">hire me</button>
+        </div>
+
+        <img class="user z-2 animate__animated animate__tada" src="./assets/user.png" alt="">
+        <img class="user animate__animated animate__flip" src="./assets/bg-dots.svg" alt="">
+    </div>
+    <div class="navbar">
+        <a href="">John Doe</a>
+        <a href="">home</a>
+        <a href="">about</a>
+        <a href="">contact</a>
+        <a href="">projects</a>
+        <a href="">skills</a>
+    </div>
+
+    <!-- skills start -->
+    <div class="skills">
+
+        <div class="frontend">
+
+            <div class="progress">
+                <div class="bar html">html</div>
+            </div>
+
+            <div class="progress">
+                <div class="bar css">css</div>
+            </div>
+
+            <div class="progress">
+                <div class="bar js">js</div>
+            </div>
+
+        </div>
+        <div class="backend">
+
+            <div class="progress">
+                <div class="bar html">html</div>
+            </div>
+
+            <div class="progress">
+                <div class="bar css">css</div>
+            </div>
+
+            <div class="progress">
+                <div class="bar js">js</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- skills end -->
+
+    <!-- project start -->
+    <div class="project">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="">
+            <div class="body">
+                <h1>todo</h1>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <a href="">visit</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                alt="">
+            <div class="body">
+                <h1>todo</h1>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <a href="">visit</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- project end -->
+
+
+
+    <div style="height: 4000px;"></div>
+</body>
+
+</html>
