@@ -11,22 +11,22 @@
 </head>
 
 <body>
-    <h1>hello</h1>
     <script>
-        let arr = [10, 20, 30, 40, 50]
-        // arr.push(30)
-        // arr.unshift(5)
-        // arr.pop()
-        // arr.shift()
-        // arr.splice(1, 2)
-
-        // 1 is start index
-        // 2 is upto end index (without including index 2)
-        let x = arr.slice(1, 2)
-        console.log(x)
-        console.table(arr)
-
-
+        // let brand = ["hero", "honda"]
+        let brand = [
+            {
+                name: "hero",
+                country: "india",
+                models: ["splender", "passion"]
+            },
+            {
+                name: "honda",
+                country: "japan",
+                models: ["activa", "abc"]
+            },
+        ]
+        console.log(brand[1].country)
+        console.log(brand[0].models[1])
 
 
     </script>

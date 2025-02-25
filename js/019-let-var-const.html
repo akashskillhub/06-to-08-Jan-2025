@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var x = undefined
+        // let y
+
+
+        console.log(x)
+        var x = 10 //decleartion + initilization
+
+        // Temporal Dead Zone
+        // console.log(y)
+        // let y = 10
+
+        // console.log(z)
+        // const z = 10
+
+        /*
+                    hoisting    TDZ     re-initilize       re-decleare          scope
+            var         ✔️      ❌          ✔️                 ✔️           functional
+            let         ✔️      ✔️          ✔️                 ❌           block
+            const       ✔️      ✔️          ❌                 ❌           block
+
+        */
+
+        var n1 = 10
+        n1 = 20
+        console.log(n1)
+
+
+        // re dcleare
+        var test = "dell"
+        var test = "dell"
+
+        let demo = "dell"
+        let demo = "dell"
+
+        const result = "dell"
+        const result = "dell"
+
+
+
+
+    </script>
+</body>
+
+</html>
