@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="fname">
+
+    <div id="root"></div>
+    <button onclick="handleAdd()">add</button>
+    <button onclick="handleRemove()">remove</button>
+
+    <script>
+        function handleAdd() {
+            const x = document.getElementById("fname").value
+            console.log(x);
+
+            console.log("add success")
+            // document.getElementById("root").innerHTML = "welcome to js"
+            document.getElementById("root").innerHTML = "<h1>welcome to js</h1>"
+        }
+        function handleRemove() {
+            console.log("remove success")
+            document.getElementById("root").innerHTML = ""
+        }
+    </script>
+</body>
+
+</html>

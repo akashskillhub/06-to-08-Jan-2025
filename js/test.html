@@ -5,29 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /* css */
-    </style>
 </head>
 
 <body>
+    <h1 id="root">hello</h1>
     <script>
-        // let brand = ["hero", "honda"]
-        let brand = [
-            {
-                name: "hero",
-                country: "india",
-                models: ["splender", "passion"]
-            },
-            {
-                name: "honda",
-                country: "japan",
-                models: ["activa", "abc"]
-            },
-        ]
-        console.log(brand[1].country)
-        console.log(brand[0].models[1])
-
+        const x = document.getElementById("root").innerHTML
+        console.log(x)
 
     </script>
 </body>
