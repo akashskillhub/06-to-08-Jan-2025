@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // array object function
+        const arr = ["dell", "hp"]
+        const x = arr // ❌ This is NOT COPY
+        x[0] = "apple"
+        console.log(x)
+        console.log(arr)
+
+        const obj = { name: "john", age: 20 }
+        const y = obj
+        y.name = "ross"
+        console.log(y)
+        console.log(obj)
+
+        function demo() {
+            console.log("dell")
+            return 10
+        }
+        const z = demo
+        const dummy = { name: "ethan", getData: demo }
+        dummy.getData
+
+
+
+
+    </script>
+</body>
+
+</html>
