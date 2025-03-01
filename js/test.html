@@ -8,21 +8,13 @@
 </head>
 
 <body>
+    <input type="text" id="kahipn">
+    <button onclick="test()">clik me</button>
     <script>
-        // const num = 77
-        // if (num % 2 === 0) {
-        //     console.log("even")
-        // } else {
-        //     console.log("odd")
-        // }
+        function test() {
+            const x = document.getElementById("kahipn")
+            console.log(x.value)
 
-        const arr = [1, 5, 4, 39, 7]
-        for (const item of arr) {
-            if (item % 2 === 0) {
-                console.log(`${item} is even`)
-            } else {
-                console.log(`${item} is odd`)
-            }
         }
     </script>
 </body>
