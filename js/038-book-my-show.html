@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap By SKILLHUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .seat {
+            height: 35px;
+            width: 35px;
+            border: 1px solid gray;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .seat:hover {
+            background-color: green;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <div class="card">
+                    <div class="card-header">Book My Show Lite</div>
+                    <div class="card-body">
+                        <div class="bg-secondary text-light text-center">screen</div>
+                        <div class="d-flex gap-2 flex-wrap my-3" id="seat-wrapper"></div>
+                        <div id="message" class="mt-5"></div>
+
+                        <button onclick="handleBooking()" type="button" class="btn btn-primary w-100">Book Seat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const seatPrice = 500
+        const seatWrapper = document.querySelector("#seat-wrapper")
+        for (let i = 1; i <= 100; i++) {
+            seatWrapper.innerHTML += `<div id="s-${i}" onclick="handleSeatSelection(${i})" class="seat">${i}</div>`
+        }
+
+        function handleSeatSelection(id) {
+            const selectedSeat = document.querySelector(`#s-${id}`)
+            if (!selectedSeat.classList.contains("bg-secondary")) {
+                selectedSeat.classList.toggle("bg-success")
+            }
+
+            const totalSeats = document.querySelectorAll(".bg-success")
+            document.querySelector("#message").innerHTML = `You have selected ${totalSeats.length} seats and estimated bill amount is ${totalSeats.length * seatPrice}`
+        }
+
+        function handleBooking() {
+            const totalSeats = document.querySelectorAll(".bg-success")
+            for (const item of totalSeats) {
+                item.classList.remove("bg-success")
+                item.classList.add("bg-secondary")
+            }
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap By SKILLHUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .seat {
+            border: 1px solid gray;
+            height: 30px;
+            width: 60px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .cushion {
+            border: 1px solid gray;
+            height: 20px;
+            width: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body d-flex gap-3" id="lower"></div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body  d-flex gap-3" id="upper"></div>
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="handleBooking()" class="btn btn-primary my-3">Book</button>
+        <div id="root"></div>
+    </div>
+
+    <script>
+        const lower = document.querySelector("#lower")
+        const upper = document.querySelector("#upper")
+        for (let i = 1; i <= 18; i = i + 3) {
+            lower.innerHTML += `
+                <div>
+                    <div class="seat" onclick="handleSeatSelection('#l-${i}')" id="l-${i}">
+                        <div class="cushion"></div>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div class="seat"  onclick="handleSeatSelection('#l-${i + 1}')" id="l-${i + 1}">
+                        <div class="cushion"></div>
+                    </div>
+                    <div style="height: 50px;"></div>
+                    <div class="seat" onclick="handleSeatSelection('#l-${i + 2}')" id="l-${i + 2}">
+                        <div class="cushion"></div>
+                    </div>
+                </div>
+            `
+            upper.innerHTML += `
+                <div>
+                    <div class="seat" onclick="handleSeatSelection('#u-${i}')" id="u-${i}">
+                        <div class="cushion"></div>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <div class="seat" onclick="handleSeatSelection('#u-${i + 1}')" id="u-${i + 1}">
+                        <div class="cushion"></div>
+                    </div>
+                    <div style="height: 50px;"></div>
+                    <div class="seat" onclick="handleSeatSelection('#u-${i + 2}')" id="u-${i + 2}">
+                        <div class="cushion"></div>
+                    </div>
+                </div>
+            `
+        }
+
+        function handleSeatSelection(id) {
+            const seat = document.querySelector(id)
+            if (!seat.classList.contains("bg-secondary")) {
+                seat.classList.toggle("bg-dark")
+                const selectedSeats = document.querySelectorAll(".bg-dark")
+                console.log(selectedSeats.length)
+            }
+        }
+        function handleBooking() {
+            let lowerCount = 0, upperCount = 0
+            const selectedSeats = document.querySelectorAll(".bg-dark")
+
+            for (const item of selectedSeats) {
+                item.classList.remove("bg-dark")
+                item.classList.add("bg-secondary")
+                if (item.id[0] === "l") {
+                    lowerCount++
+                } else {
+                    upperCount++
+                }
+            }
+            document.querySelector("#root").innerHTML = `<div class="alert alert-success">you have selected ${lowerCount} lower seats, ${upperCount} upper seats and total ${selectedSeats.length}. estimated bill is ${lowerCount * 1000 + upperCount * 500}</div>`
+
+            console.log(lowerCount * 1000 + upperCount * 500)
+
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

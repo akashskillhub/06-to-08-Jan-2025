@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="title" class="test">heading 1</h1>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <h1>hello</h1>
+
+    <button onclick="handleClick()">click me</button>
+    <script>
+        function handleClick() {
+            // const title = document.getElementById("title")
+            // const title = document.getElementsByClassName("test")
+            // const title = document.getElementsByTagName("p")
+
+            // const title = document.querySelector("#title")
+            // const title = document.querySelector(".test")
+            // const title = document.querySelector("p")
+
+            // const title = document.querySelector("h1") // single node
+            const title = document.querySelectorAll("h1") // array of node
+            console.log(title)
+
+        }
+    </script>
+</body>
+
+</html>
