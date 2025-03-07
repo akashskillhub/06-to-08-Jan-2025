@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap By SKILLHUB</title>
+    <style>
+        .box {
+            height: 100px;
+            width: 100px;
+            border: 1px solid gray;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class="card">
+                    <div class="card-header">X-n-O</div>
+                    <div class="card-body d-flex flex-wrap" id="gameBox"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let chance = "x"
+        const gameBox = document.getElementById("gameBox")
+        for (let i = 0; i < 9; i++) {
+            gameBox.innerHTML += `<div onclick="playGame(${i})" id="${i}" class="box"></div>`
+        }
+
+        function playGame(id) {
+            const selectedBox = document.getElementById(id)
+            if (!selectedBox.classList.contains("bg-danger") && !selectedBox.classList.contains("bg-primary")) {
+
+                if (chance === "x") {
+                    selectedBox.innerHTML = "X"
+                    selectedBox.classList.add("bg-danger")
+                    chance = "o"
+                } else {
+                    selectedBox.innerHTML = "O"
+                    selectedBox.classList.add("bg-primary")
+                    chance = "x"
+                }
+
+            } else {
+                console.log("No Cheating")
+
+            }
+            handleWinner()
+        }
+
+        function handleWinner() {
+            if (
+                document.getElementById("0").classList.contains("bg-danger")
+                &&
+                document.getElementById("1").classList.contains("bg-danger")
+                &&
+                document.getElementById("2").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner")
+                chance = "x"
+                resetGame()
+
+            }
+            if (
+                document.getElementById("0").classList.contains("bg-primary")
+                &&
+                document.getElementById("1").classList.contains("bg-primary")
+                &&
+                document.getElementById("2").classList.contains("bg-primary")
+            ) {
+                console.log("O is winner")
+                chance = "o"
+                resetGame()
+
+            }
+        }
+
+        function resetGame() {
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i).classList.remove("bg-danger", "bg-primary")
+                document.getElementById(i).innerHTML = ""
+            }
+        }
+        /*
+                 0 1 2
+                 3 4 5
+                 6 7 8
+                 0 4 8
+                 2 4 6
+                 0 3 6
+                 1 4 7
+                 2 5 8
+
+        */
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
