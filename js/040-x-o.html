@@ -24,26 +24,51 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 offset-sm-4">
-                <div class="card">
-                    <div class="card-header">X-n-O</div>
-                    <div class="card-body d-flex flex-wrap" id="gameBox"></div>
+                <div class="card" id="playerBox">
+                    <div class="card-header">Play X n O</div>
+                    <div class="card-body">
+                        <input id="player1" type="text" class="form-control my-3" placeholder="Enter Player 1 Name">
+                        <input id="player2" type="text" class="form-control my-3" placeholder="Enter Player 2 Name">
+                        <button onclick="startGame()" type="button" class="btn btn-primary w-100">Start Game</button>
+                    </div>
+                </div>
+
+                <div id="wrapper" class="d-none">
+                    <div class="card">
+                        <div class="card-header">X-n-O</div>
+                        <div class="card-body d-flex flex-wrap" id="gameBox"></div>
+                    </div>
+
+                    <div class="card mt-2">
+                        <div class="card-body" id="result"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        let chance = "x"
+        let xWinCount = 0, oWinCount = 0, total = 0, drawCount = 0
+        let chance = "x", player1, player2
+
         const gameBox = document.getElementById("gameBox")
         for (let i = 0; i < 9; i++) {
-            gameBox.innerHTML += `<div onclick="playGame(${i})" id="${i}" class="box"></div>`
+            gameBox.innerHTML += `<div onclick="playGame(${i})" id="${i}" class="box">${i}</div>`
         }
 
+        function startGame() {
+            document.querySelector("#wrapper").classList.remove("d-none")
+            document.querySelector("#playerBox").classList.add("d-none")
+
+            player1 = document.querySelector("#player1").value
+            player2 = document.querySelector("#player2").value
+            handleDispaly()
+        }
         function playGame(id) {
             const selectedBox = document.getElementById(id)
             if (!selectedBox.classList.contains("bg-danger") && !selectedBox.classList.contains("bg-primary")) {
 
                 if (chance === "x") {
-                    selectedBox.innerHTML = "X"
+                    selectedBox.innerHTML = "x"
                     selectedBox.classList.add("bg-danger")
                     chance = "o"
                 } else {
@@ -54,12 +79,17 @@
 
             } else {
                 console.log("No Cheating")
-
             }
-            handleWinner()
+            if (!handleWinner() && handleFill()) {
+                console.log("match draw")
+                drawCount++
+                resetGame()
+            }
+
         }
 
         function handleWinner() {
+
             if (
                 document.getElementById("0").classList.contains("bg-danger")
                 &&
@@ -67,10 +97,103 @@
                 &&
                 document.getElementById("2").classList.contains("bg-danger")
             ) {
-                console.log("X is winner")
+                console.log("X is winner");
                 chance = "x"
+                xWinCount++
                 resetGame()
+                return true
+            }
 
+            if (
+                document.getElementById("3").classList.contains("bg-danger")
+                &&
+                document.getElementById("4").classList.contains("bg-danger")
+                &&
+                document.getElementById("5").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("6").classList.contains("bg-danger")
+                &&
+                document.getElementById("7").classList.contains("bg-danger")
+                &&
+                document.getElementById("8").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("0").classList.contains("bg-danger")
+                &&
+                document.getElementById("4").classList.contains("bg-danger")
+                &&
+                document.getElementById("8").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("2").classList.contains("bg-danger")
+                &&
+                document.getElementById("4").classList.contains("bg-danger")
+                &&
+                document.getElementById("6").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("0").classList.contains("bg-danger")
+                &&
+                document.getElementById("3").classList.contains("bg-danger")
+                &&
+                document.getElementById("6").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("1").classList.contains("bg-danger")
+                &&
+                document.getElementById("4").classList.contains("bg-danger")
+                &&
+                document.getElementById("7").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("2").classList.contains("bg-danger")
+                &&
+                document.getElementById("5").classList.contains("bg-danger")
+                &&
+                document.getElementById("8").classList.contains("bg-danger")
+            ) {
+                console.log("X is winner");
+                chance = "x"
+                xWinCount++
+                resetGame()
+                return true
             }
             if (
                 document.getElementById("0").classList.contains("bg-primary")
@@ -79,19 +202,136 @@
                 &&
                 document.getElementById("2").classList.contains("bg-primary")
             ) {
-                console.log("O is winner")
-                chance = "o"
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
                 resetGame()
-
+                return true
             }
-        }
+            if (
+                document.getElementById("3").classList.contains("bg-primary")
+                &&
+                document.getElementById("4").classList.contains("bg-primary")
+                &&
+                document.getElementById("5").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("6").classList.contains("bg-primary")
+                &&
+                document.getElementById("7").classList.contains("bg-primary")
+                &&
+                document.getElementById("8").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("2").classList.contains("bg-primary")
+                &&
+                document.getElementById("4").classList.contains("bg-primary")
+                &&
+                document.getElementById("6").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("0").classList.contains("bg-primary")
+                &&
+                document.getElementById("3").classList.contains("bg-primary")
+                &&
+                document.getElementById("6").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("1").classList.contains("bg-primary")
+                &&
+                document.getElementById("4").classList.contains("bg-primary")
+                &&
+                document.getElementById("7").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("2").classList.contains("bg-primary")
+                &&
+                document.getElementById("5").classList.contains("bg-primary")
+                &&
+                document.getElementById("8").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
+            if (
+                document.getElementById("0").classList.contains("bg-primary")
+                &&
+                document.getElementById("1").classList.contains("bg-primary")
+                &&
+                document.getElementById("2").classList.contains("bg-primary")
+            ) {
+                console.log(" O is winner");
+                chance = "O"
+                oWinCount++
+                resetGame()
+                return true
+            }
 
+            return false
+        }
         function resetGame() {
             for (let i = 0; i < 9; i++) {
                 document.getElementById(i).classList.remove("bg-danger", "bg-primary")
                 document.getElementById(i).innerHTML = ""
             }
+            handleDispaly()
         }
+        // ES6+
+        // gsap
+        function handleFill() {
+            let count = 0
+            for (let i = 0; i < 9; i++) {
+                if (document.getElementById(i).classList.contains("bg-danger") || document.getElementById(i).classList.contains("bg-primary")) {
+                    count++
+                }
+            }
+            return count === 9
+        }
+
+        function handleDispaly(params) {
+            const result = document.getElementById("result")
+            result.innerHTML = `
+                <p>${player1} : <span>${xWinCount}</span> </p>
+                <p>${player2} : <span>${oWinCount}</span> </p>
+                <p>draw : <span>${drawCount}</span> </p>
+                <p>Total : <span>${xWinCount + oWinCount + drawCount}</span> </p>
+            `
+        }
+
+
         /*
                  0 1 2
                  3 4 5
@@ -101,7 +341,6 @@
                  0 3 6
                  1 4 7
                  2 5 8
-
         */
 
     </script>
