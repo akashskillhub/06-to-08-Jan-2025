@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-200 h-screen flex flex-col justify-center items-center">
+    <div class="w-[75%] mb-10 overflow-hidden">
+        <h1 class="text-5xl">hi my name is John</h1>
+        <p class="text-2xl">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita sapiente autem officiis sunt tenetur quo,
+            dolore maxime iusto quibusdam corrupti illo dignissimos, modi similique error ratione non eveniet fugit
+            itaque.
+        </p>
+    </div>
+
+    <div id="navbar" class="bg-slate-600 h-20 w-[75%] flex justify-around items-center overflow-hidden">
+        <a class="text-slate-100 text-4xl" href="">SKILLHUB</a>
+        <a class="text-slate-100 text-2xl" href="">Home</a>
+        <a class="text-slate-100 text-2xl" href="">About</a>
+        <a class="text-slate-100 text-2xl" href="">Contact</a>
+    </div>
+
+    <script src="./tailwind.config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // green sock animation platform
+        gsap.from("#navbar", { width: 0, duration: 1 })
+        gsap.from("a", { y: -80, duration: 0.5, stagger: 0.1, delay: 1 })
+        gsap.from("h1", { x: -200, duration: 0.5 })
+        gsap.from("p", { x: 500, duration: 0.5 })
+    </script>
+</body>
+
+</html>
