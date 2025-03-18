@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = [10, 20] // abc
+        // const x = arr //  ❌ not a copy
+        const x = [...arr] // shalow copy
+        x.push(5)
+        console.log(x)
+        console.log(arr)
+
+        const obj = { name: "ross", age: 22 }
+        // const y = obj //  ❌not a copy
+        const y = { ...obj } // shalow copy
+        y.age = 25
+        console.log(y)
+        console.log(obj)
+
+
+    </script>
+</body>
+
+</html>

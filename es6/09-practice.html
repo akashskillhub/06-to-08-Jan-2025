@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const demo = arg => {
+            return { name: arg }
+        }
+        //           👇rename
+        const { name: fname } = demo("joe")
+        console.log(fname)
+
+        const dummy = () => { }
+        const ob = { isSuccess: true, error: false }
+        const useSelector = () => [dummy, ob]
+        const [x, { isSuccess, error: truti }] = useSelector()
+
+        console.log(x)
+        console.log(isSuccess)
+        console.log(truti)
+
+
+    </script>
+</body>
+
+</html>

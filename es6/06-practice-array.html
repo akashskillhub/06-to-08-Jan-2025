@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let x = 10, y = 20, z;
+        [y, x] = [x, y]
+        // const arr = [x, y];
+        // [y, x] = arr
+        console.log(x, y);
+
+        // console.log(`x=${x} y=${y}`)
+        // z = x
+        // x = y
+        // y = z
+        // console.log(`x=${x} y=${y}`)
+
+        // x = 20 , y = 10
+
+
+        const demo = () => { }
+        const useState = (n1) => {
+            return [n1, demo] // [10,() => { } ]
+        }
+        const [count, setCount] = useState(10) //[10,() => { } ]
+        console.log(count)
+        console.log(setCount)
+
+        const arr = ["dell", "hp", "apple"]
+        const [, p] = arr
+        console.log(p)
+
+        // spread and rest oprator
+
+
+    </script>
+</body>
+
+</html>
