@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // resolve => success
+        // reject  => fail
+        const handleSuccess = () => console.log("success")
+        const handleFail = () => console.log("fail")
+
+        const x = new Promise((resolve, reject) => {
+            // resolve("ok")
+            reject("not ok")
+        })
+        x
+            .then(handleSuccess)
+            .catch(handleFail)
+
+
+
+        // then catch
+        // async await
+    </script>
+</body>
+
+</html>

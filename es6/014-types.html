@@ -8,17 +8,12 @@
 </head>
 
 <body>
+    <button onclick="console.log('inline js')">click me</button>
     <script>
-        // const arr = ["dell", "hp"]
-        const arr = ["dell", "hp"]
-        // const x = arr
-        const x = [...arr] // shalow copy
-        x.push("apple")
-        console.log(x)
-        console.log(arr)
-
-
+        console.log("internal js")
     </script>
+
+    <script src="./assets/test.js"></script>
 </body>
 
 </html>
