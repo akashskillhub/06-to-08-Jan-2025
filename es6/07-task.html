@@ -9,14 +9,13 @@
 
 <body>
     <script>
-        // const arr = ["dell", "hp"]
-        const arr = ["dell", "hp"]
-        // const x = arr
-        const x = [...arr] // shalow copy
-        x.push("apple")
-        console.log(x)
-        console.log(arr)
+        const arr = [10, 20, 30]
+        const [x] = arr
 
+        const obj = { name: "ross", city: "london" }
+        const { city: y } = obj
+        // console.log(city)
+        console.log(y)
 
     </script>
 </body>
