@@ -1,0 +1,28 @@
+{
+  "user": [
+    {
+      "name": "john",
+      "email": "admin@gmail.com",
+      "mobile": "8888888888",
+      "password": "123",
+      "gender": "male",
+      "id": 2
+    },
+    {
+      "name": "aa",
+      "email": "admin@gmail.com",
+      "mobile": "9284123374",
+      "password": "asdas",
+      "gender": "female",
+      "id": 5
+    },
+    {
+      "name": "kate",
+      "email": "john@gmail.com",
+      "mobile": "8888888888",
+      "password": "sdfds",
+      "gender": "female",
+      "id": 6
+    }
+  ]
+}

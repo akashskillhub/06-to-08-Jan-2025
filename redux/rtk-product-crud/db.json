@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "name": "Apple iPhone 16 (White, 128 GB)",
+      "hero": "https://images.unsplash.com/photo-1682687982183-c2937a74257c?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "desc": " iPhone 16. Built for Apple Intelligence. Featuring Camera Control. 48 MP Fusion camera. Five vibrant colours. And A18 chip.",
+      "price": "69,999",
+      "id": 1
+    },
+    {
+      "name": "akash",
+      "hero": "https://images.unsplash.com/photo-1683009426501-028aabdd7b8a?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "desc": "asdasd",
+      "price": "500",
+      "id": 2
+    }
+  ]
+}

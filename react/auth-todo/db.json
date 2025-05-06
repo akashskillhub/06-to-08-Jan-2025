@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "name": "akash",
+      "email": "akash@gmail.com",
+      "password": "123",
+      "cpassword": "123",
+      "id": 1
+    },
+    {
+      "name": "kate",
+      "email": "kate@gmail.com",
+      "password": "123",
+      "cpassword": "123",
+      "id": 2
+    }
+  ],
+  "notes": [
+    {
+      "task": "learn css",
+      "desc": "aesrwe",
+      "priority": "medium",
+      "auther": 2,
+      "id": 1
+    }
+  ]
+}

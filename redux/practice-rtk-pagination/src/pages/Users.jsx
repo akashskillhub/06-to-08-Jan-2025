@@ -1,0 +1,132 @@
+import clsx from 'clsx'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useAddUserMutation, useDeleteUserMutation, useGetUsersQuery } from '../redux/user.api'
+import { useState } from 'react'
+
+const Users = () => {
+    const [limit, setLimit] = useState(2)
+    const [start, setStart] = useState(0)
+    const { data } = useGetUsersQuery({ limit, start })
+    const [addUser] = useAddUserMutation()
+    const [removeUser] = useDeleteUserMutation()
+
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            hero: "",
+            role: "",
+        },
+        validationSchema: yup.object({
+            name: yup.string().required(),
+            hero: yup.string().required(),
+            role: yup.string().required(),
+        }),
+        onSubmit: (values, { resetForm }) => {
+            resetForm()
+        }
+    })
+    const handleClasses = key => clsx({
+        "form-control my-2": true,
+        "is-invalid": formik.touched[key] && formik.errors[key],
+        "is-valid": formik.touched[key] && !formik.errors[key],
+    })
+
+    return <div className="container">
+        <div className="row">
+            <div className="col-sm-6 offset-sm-3">
+                <div class="card">
+                    <div class="card-header">Users</div>
+                    <div class="card-body">
+                        <form onSubmit={formik.handleSubmit}>
+                            <div>
+                                <input placeholder='enter name' type="text" className={handleClasses("name")} {...formik.getFieldProps("name")} />
+                                <span className="invalid-feedback">{formik.errors.name}</span>
+                            </div>
+                            <div>
+                                <input placeholder='enter hero image url' type="text" className={handleClasses("hero")} {...formik.getFieldProps("hero")} />
+                                <span className="invalid-feedback">{formik.errors.hero}</span>
+                            </div>
+                            <div>
+                                <select className={handleClasses("role")} {...formik.getFieldProps("role")}>
+                                    <option selected>Choose Role </option>
+                                    <option value="frontend developer">frontend developer</option>
+                                    <option value="backend developer">backend developer</option>
+                                    <option value="mobile app develper">mobile app develper</option>
+                                </select>
+                                <span className="invalid-feedback">{formik.errors.role}</span>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Add</button>
+                        </form>
+                    </div>
+                </div>
+
+                <select
+                    className="form-select my-3"
+                    value={limit}
+                    onChange={e => {
+                        setLimit(e.target.value)
+                        setStart(0)
+                    }}>
+                    <option selected>choose limit</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+
+                <button
+                    onClick={e => setStart(start === 0 ? 0 : start - limit)}
+                    disabled={start === 0}
+                    type="button"
+                    className="btn btn-primary me-2">pre</button>
+                {
+                    [...Array(Math.ceil(10 / limit)).keys()].map(item => <button type="button" onClick={e => setStart(item * limit)}
+                        class={`btn me-2 ${item * limit === start ? "btn-primary" : "btn-outline-primary"}`}>
+                        {item}</button>)
+                }
+                <button
+                    onClick={e => setStart(start + limit <= 10 ? start + limit : start)}
+                    disabled={start + limit >= 10}
+                    type="button"
+                    class="btn btn-primary">next</button>
+
+                {
+                    data && <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Hero</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                data.map(item => <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>
+                                        <img src={item.hero} height={50} alt="" />
+                                    </td>
+                                    <td>
+                                        <span class="badge text-bg-primary">{item.role}</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                }
+
+
+            </div>
+        </div>
+    </div>
+}
+
+export default Users
