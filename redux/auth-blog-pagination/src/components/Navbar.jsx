@@ -1,8 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { logout } from '../redux/auth.slice'
 
 const Navbar = () => {
+    const dispatch = useDispatch()
     const { user } = useSelector(state => state.skillhub)
     return <nav class="navbar navbar-expand-lg bg-danger navbar-dark">
         <div class="container">
@@ -23,7 +25,7 @@ const Navbar = () => {
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">Action</a></li>
                                         <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><button onClick={e => dispatch(logout())} class="dropdown-item text-danger">Logout</button></li>
                                     </ul>
                                 </div>
                             </>

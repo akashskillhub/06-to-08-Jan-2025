@@ -4,7 +4,12 @@ import { authApi } from "./auth.api";
 const authSlice = createSlice({
     name: "authSlice",
     initialState: { user: JSON.parse(localStorage.getItem("AUTH")) },
-    reducers: {},
+    reducers: {
+        logout: (state, { payload }) => {
+            localStorage.removeItem("AUTH")
+            state.user = null
+        }
+    },
     extraReducers: builder => builder
         // 👇redux Toolkit
         // .addCase(actionName.pending, (state, { payload }) => {
@@ -18,5 +23,5 @@ const authSlice = createSlice({
 
 })
 
-export const { invalidate } = authSlice.actions
+export const { logout } = authSlice.actions
 export default authSlice.reducer
