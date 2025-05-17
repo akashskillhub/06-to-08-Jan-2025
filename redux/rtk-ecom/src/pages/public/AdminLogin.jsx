@@ -1,16 +1,14 @@
 import { useFormik } from 'formik'
 import *as yup from 'yup'
 import handleClasses from '../../share/handleClasses'
-import { useLazyLoginUserQuery } from '../../redux/apis/auth.api'
+import { useLazyLoginAdminQuery, useLazyLoginUserQuery } from '../../redux/apis/auth.api'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { useSelector } from 'react-redux'
 
-const Login = () => {
-    const { user } = useSelector(state => state.auth)
+const AdminLogin = () => {
     const navigate = useNavigate()
-    const [signin, { isSuccess, data, reset }] = useLazyLoginUserQuery()
+    const [signin, { isSuccess, data, reset }] = useLazyLoginAdminQuery()
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -32,21 +30,15 @@ const Login = () => {
                 reset()
             } else {
                 toast.success("login success")
-                navigate("/user")
+                navigate("/admin")
             }
         }
     }, [isSuccess])
-
-    useEffect(() => {
-        if (user) {
-            navigate("/user")
-        }
-    }, [])
     return <div class="container">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                 <div class="card">
-                    <div class="card-header">Login</div>
+                    <div class="card-header bg-primary text-light">Admin Login</div>
                     <form onSubmit={formik.handleSubmit}>
                         <div class="card-body">
                             <div>
@@ -85,4 +77,4 @@ const Login = () => {
     </div>
 }
 
-export default Login
+export default AdminLogin

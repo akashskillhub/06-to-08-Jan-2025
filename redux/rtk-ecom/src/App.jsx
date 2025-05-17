@@ -11,23 +11,34 @@ import Users from './pages/admin/Users'
 import Orders from './pages/admin/Orders'
 import UserNavbar from './components/UserNavbar'
 import History from './pages/user/History'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
+import AdminLogin from './pages/public/AdminLogin'
+import UserProtected from './share/UserProtected'
+import AdminProtected from './share/AdminProtected'
+import Cart from './pages/public/Cart'
 
 const App = () => {
+
   return <>
+    <ToastContainer />
+
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<><PublicNavbar /><Outlet /></>}>
           <Route index element={<Home />} />
-          <Route path='details' element={<Details />} />
+          <Route path='details/:skillhub' element={<Details />} />
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
+          <Route path='admin-login' element={<AdminLogin />} />
+          <Route path='cart' element={<Cart />} />
         </Route>
-        <Route path='/admin' element={<><AdminNavbar /><Outlet /></>}>
+        <Route path='/admin' element={<AdminProtected><AdminNavbar /><Outlet /></AdminProtected>}>
           <Route index element={<Products />} />
           <Route path='users' element={<Users />} />
           <Route path='orders' element={<Orders />} />
         </Route>
-        <Route path='/user' element={<><UserNavbar /><Outlet /></>}>
+        <Route path='/user' element={<UserProtected><UserNavbar /><Outlet /></UserProtected>}>
           <Route index element={<History />} />
         </Route>
         <Route path='*' element={<h1>Page Not Found</h1>} />

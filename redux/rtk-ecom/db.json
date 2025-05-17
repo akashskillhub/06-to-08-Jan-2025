@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "name": "john",
+      "email": "john@gmail.com",
+      "password": "123",
+      "cpassword": "123",
+      "id": 1
+    }
+  ],
+  "admin": [
+    {
+      "id": 1,
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "123"
+    }
+  ],
+  "products": [
+    {
+      "name": "iphone",
+      "price": "69999",
+      "desc": " iPhone 16 Plus. Built for Apple Intelligence. Featuring Camera Control. 48 MP Fusion camera. Five vibrant colours. And A18 chip.",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/o/8/z/-original-imah4jykj39bgzsh.jpeg?q=70",
+      "id": 2
+    },
+    {
+      "name": "POCO M6 Plus 5G (Misty Lavender, 128 GB)",
+      "price": "10000",
+      "desc": "Handset, 33W Charger, USB Type-C Cable, Sim Eject Tool, Protective Case, Quick Start Guide, Warranty Card",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/9/b/n/-original-imah3afnqj84usyy.jpeg?q=70",
+      "id": 3
+    },
+    {
+      "name": "Motorola g45 5G (Brilliant Green, 128 GB)",
+      "price": "15000",
+      "desc": "Fast 5G phone with a Fast processor in the segment. The moto g45 5G is powered by the Snapdragon 6s Gen 3 octa-core processor and LPDDR4X memory. Experience the thrill of blazing-fast 5G speeds",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/y/x/-original-imah3xk8crpgrg9y.jpeg?q=70",
+      "id": 4
+    },
+    {
+      "name": "akash",
+      "price": "500",
+      "desc": "asdasd",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70",
+      "id": 5
+    },
+    {
+      "name": "akash",
+      "price": "500",
+      "desc": "asdasd",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70",
+      "id": 6
+    },
+    {
+      "name": "SAMSUNG Galaxy S24+ 5G (Onyx Black, 256 GB)  (12 GB RAM)",
+      "price": "52999",
+      "desc": "ake a look at the Samsung Galaxy S24+ smartphone, a remarkable combination of amazing technology and advanced sophistication. Discover the beauty of picture editing with AI power. You can now easily",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/z/w/w/-original-imah4zp8pf2uehv4.jpeg?q=70",
+      "id": 7
+    }
+  ]
+}

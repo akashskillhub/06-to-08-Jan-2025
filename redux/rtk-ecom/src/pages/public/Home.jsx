@@ -1,47 +1,30 @@
 import React from 'react'
+import { useGetPublicProductsQuery } from '../../redux/apis/public.api'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
+    const { data } = useGetPublicProductsQuery()
     return <>
-        <Hero />
-        <ProductList />
+        <Hero data={data} />
+        <ProductList data={data} />
     </>
 }
 
 export default Home
 
-const Hero = () => {
+const Hero = ({ data }) => {
     return <>
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
-
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
-
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
-
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
-                    </div>
-                </div>
+                {
+                    data && data.map((item, i) => <div class={`carousel-item bg-secondary ${i === 0 && "active"}`}>
+                        <img src={item.image} alt="" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{item.name}</h5>
+                            <p>{item.desc}</p>
+                        </div>
+                    </div>)
+                }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" ></span>
@@ -55,25 +38,13 @@ const Hero = () => {
     </>
 }
 
-const ProductList = () => {
-    const data = [
-        { name: "mobile 1", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 2", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 3", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 4", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 5", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 6", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 7", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 8", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 9", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-        { name: "mobile 10", price: "12999", image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/y/e/-original-imah4jykc3knhq3b.jpeg?q=70" },
-    ]
+const ProductList = ({ data }) => {
     return <>
         <div className="container">
             <div className="row">
                 {
-                    data.map(item => <div className="col-sm-3">
-                        <div class="card">
+                    data && data.map(item => <div className="col-sm-3">
+                        <Link to={`/details/${item.id}`} class="card">
                             <div class="card-body">
                                 <img src={item.image} className='card-img-top' alt="" />
                                 <div className='d-flex justify-content-between mt-3'>
@@ -81,7 +52,7 @@ const ProductList = () => {
                                     <h6>{item.price}</h6>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>)
                 }
             </div>
