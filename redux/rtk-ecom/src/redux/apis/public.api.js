@@ -22,8 +22,21 @@ export const publicApi = createApi({
                     }
                 },
             }),
+            placeOrder: builder.mutation({
+                query: orderData => {
+                    return {
+                        url: "/orders",
+                        method: "POST",
+                        body: orderData
+                    }
+                },
+            }),
         }
     }
 })
 
-export const { useGetPublicProductsQuery, useGetPublicProductDetailsQuery } = publicApi
+export const {
+    useGetPublicProductsQuery,
+    useGetPublicProductDetailsQuery,
+    usePlaceOrderMutation
+} = publicApi

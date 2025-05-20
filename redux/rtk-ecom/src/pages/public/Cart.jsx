@@ -22,34 +22,41 @@ const Cart = () => {
     }
     return <>
         <div className="container">
-            <div className="row">
+            <div className="row mt-5">
                 <div className="col-sm-8">
-                    <div>
-                        <button onClick={e => dispatch(emptyCart())}>empty</button>
-                    </div>
-                    {
-                        cart.map(item => <div class="card">
+                    <div className="card">
+                        <div className="card-header d-flex justify-content-between">
+                            <span>Cart Items</span>
+                            <button className='btn btn-sm btn-outline-danger' onClick={e => dispatch(emptyCart())}>
+                                <i className="bi bi-trash"></i>
+                            </button>
+                        </div>
 
-                            <div class="card-body">
-                                <div className="d-flex gap-3">
-                                    <div>
-                                        <img src={item.image} height={100} alt="" />
-                                        <div className='mt-3 d-flex'>
-                                            <button onClick={e => dispatch(decQty(item.id))}>-1</button>
-                                            <strong>{item.qty}</strong>
-                                            <button onClick={e => dispatch(incQty(item.id))}>+1</button>
+
+                        {
+                            cart.map(item => <div>
+                                <div class="card-body">
+                                    <div className="d-flex gap-3">
+                                        <div>
+                                            <img src={item.image} height={100} alt="" />
+                                            <div className='mt-3 d-flex'>
+                                                <button className='btn btn-sm btn-outline-danger' onClick={e => dispatch(decQty(item.id))}>-1</button>
+                                                <strong>{item.qty}</strong>
+                                                <button className='btn btn-sm btn-outline-success' onClick={e => dispatch(incQty(item.id))}>+1</button>
+                                            </div>
+                                            <button className='btn btn-sm btn-outline-danger mt-2' onClick={e => dispatch(removeFromCart(item.id))}>remove</button>
                                         </div>
-                                        <button onClick={e => dispatch(removeFromCart(item.id))}>remove</button>
-                                    </div>
-                                    <div>
-                                        <h6>{item.name}</h6>
-                                        <h6>{item.price}</h6>
-                                        <h6>{item.desc}</h6>
+                                        <div>
+                                            <h6>{item.name}</h6>
+                                            <h6>{item.price}</h6>
+                                            <h6>{item.desc}</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>)
-                    }
+                                <hr />
+                            </div>)
+                        }
+                    </div>
                 </div>
                 <div className="col-sm-4">
                     <div class="card">
@@ -81,6 +88,10 @@ const Cart = () => {
 
                         </div>
                     </div>
+                    <Link to="/checkout" type="button" class="btn btn-primary w-100 mt-3">
+                        <i className="bi bi-wallet me-3"></i>
+                        Checkout
+                    </Link>
                 </div>
             </div>
         </div>

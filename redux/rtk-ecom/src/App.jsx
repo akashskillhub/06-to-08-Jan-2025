@@ -17,6 +17,8 @@ import AdminLogin from './pages/public/AdminLogin'
 import UserProtected from './share/UserProtected'
 import AdminProtected from './share/AdminProtected'
 import Cart from './pages/public/Cart'
+import Checkout from './pages/public/Checkout'
+import Success from './pages/public/Success'
 
 const App = () => {
 
@@ -32,6 +34,8 @@ const App = () => {
           <Route path='register' element={<Register />} />
           <Route path='admin-login' element={<AdminLogin />} />
           <Route path='cart' element={<Cart />} />
+          <Route path='checkout' element={<UserProtected><Checkout /></UserProtected>} />
+          <Route path='success' element={<UserProtected><Success /></UserProtected>} />
         </Route>
         <Route path='/admin' element={<AdminProtected><AdminNavbar /><Outlet /></AdminProtected>}>
           <Route index element={<Products />} />

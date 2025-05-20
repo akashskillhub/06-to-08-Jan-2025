@@ -20,7 +20,7 @@ const PublicNavbar = () => {
             </div>
             <Link to="/cart" type="button" class="btn btn-light">
                 <span class="badge text-bg-primary me-2">{cart.length}</span>
-                Cart
+                <i className="bi bi-cart"></i>
             </Link>
         </div>
     </nav>

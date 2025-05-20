@@ -59,5 +59,55 @@
       "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/z/w/w/-original-imah4zp8pf2uehv4.jpeg?q=70",
       "id": 7
     }
+  ],
+  "orders": [
+    {
+      "address": "kranti chow2k",
+      "mode": "cod",
+      "user": 1,
+      "cart": [
+        {
+          "name": "Motorola g45 5G (Brilliant Green, 128 GB)",
+          "price": "15000",
+          "desc": "Fast 5G phone with a Fast processor in the segment. The moto g45 5G is powered by the Snapdragon 6s Gen 3 octa-core processor and LPDDR4X memory. Experience the thrill of blazing-fast 5G speeds",
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/y/x/-original-imah3xk8crpgrg9y.jpeg?q=70",
+          "id": 4,
+          "qty": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "address": "test",
+      "mode": "cod",
+      "user": 1,
+      "cart": [
+        {
+          "name": "Motorola g45 5G (Brilliant Green, 128 GB)",
+          "price": "15000",
+          "desc": "Fast 5G phone with a Fast processor in the segment. The moto g45 5G is powered by the Snapdragon 6s Gen 3 octa-core processor and LPDDR4X memory. Experience the thrill of blazing-fast 5G speeds",
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/y/x/-original-imah3xk8crpgrg9y.jpeg?q=70",
+          "id": 4,
+          "qty": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "address": "gfghfgh",
+      "mode": "cod",
+      "user": 1,
+      "cart": [
+        {
+          "name": "Motorola g45 5G (Brilliant Green, 128 GB)",
+          "price": "15000",
+          "desc": "Fast 5G phone with a Fast processor in the segment. The moto g45 5G is powered by the Snapdragon 6s Gen 3 octa-core processor and LPDDR4X memory. Experience the thrill of blazing-fast 5G speeds",
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/y/x/-original-imah3xk8crpgrg9y.jpeg?q=70",
+          "id": 4,
+          "qty": 1
+        }
+      ],
+      "id": 3
+    }
   ]
 }
