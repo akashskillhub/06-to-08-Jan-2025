@@ -1,0 +1,39 @@
+{
+  "employees": [
+    {
+      "name": "ethan",
+      "email": "akash@gmail.com",
+      "role": "Full stack",
+      "salary": 52000,
+      "id": 1
+    },
+    {
+      "name": "john",
+      "email": "skillhubitsolution@gmail.com",
+      "role": "Full stack",
+      "salary": 34543,
+      "id": 2
+    },
+    {
+      "name": "ross",
+      "email": "kate@gmail.com",
+      "role": "Full stack",
+      "salary": 23432,
+      "id": 3
+    }
+  ],
+  "products": [
+    {
+      "brand": "apple",
+      "id": 1
+    },
+    {
+      "brand": "apple",
+      "id": 2
+    },
+    {
+      "brand": "apple",
+      "id": 3
+    }
+  ]
+}
