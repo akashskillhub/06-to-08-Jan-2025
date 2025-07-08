@@ -2,21 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const authApi = createApi({
     reducerPath: "authapi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/auth" }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "http://localhost:5000/api/auth",
+        credentials: "include"
+    }),
     tagTypes: ["auth"],
     endpoints: (builder) => {
         return {
-
-            adminregiater: builder.mutation({
-                query: userData => {
-                    return {
-                        url: "/admin-register",
-                        method: "POST",
-                        body: userData
-                    }
-                },
-                invalidatesTags: ["auth"]
-            }),
             adminlogin: builder.mutation({
                 query: userData => {
                     return {
@@ -24,6 +16,10 @@ export const authApi = createApi({
                         method: "POST",
                         body: userData
                     }
+                },
+                transformResponse: data => {
+                    localStorage.setItem("admin", JSON.stringify(data.result))
+                    return data.result
                 },
                 invalidatesTags: ["auth"]
             }),
@@ -34,6 +30,10 @@ export const authApi = createApi({
                         method: "POST",
                         body: userData
                     }
+                },
+                transformResponse: data => {
+                    localStorage.removeItem("admin")
+                    return data.result
                 },
                 invalidatesTags: ["auth"]
             }),
@@ -55,6 +55,10 @@ export const authApi = createApi({
                         body: userData
                     }
                 },
+                transformResponse: data => {
+                    localStorage.setItem("user", JSON.stringify(data.result))
+                    return data.result
+                },
                 invalidatesTags: ["auth"]
             }),
             userlogout: builder.mutation({
@@ -65,6 +69,10 @@ export const authApi = createApi({
                         body: userData
                     }
                 },
+                transformResponse: data => {
+                    localStorage.removeItem("user")
+                    return data.result
+                },
                 invalidatesTags: ["auth"]
             }),
 
@@ -72,7 +80,7 @@ export const authApi = createApi({
     }
 })
 
-export const { useAdminregiaterMutation,
+export const {
     useAdminloginMutation,
     useAdminlogoutMutation,
     useUserloginMutation,

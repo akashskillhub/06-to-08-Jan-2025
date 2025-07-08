@@ -17,7 +17,7 @@ router
     .delete("/delete-todo/:tid", deleteTodo)
 
     .get("/view-users", viewUsers)
-    .post("/activate-user", activateUser)
-    .post("/deactivate-user", deactivateUser)
+    .put("/activate-user/:uid", activateUser)
+    .put("/deactivate-user/:uid", deactivateUser)
 
 module.exports = router

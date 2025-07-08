@@ -67,6 +67,10 @@ const loginUser = async (req, res) => {
     if (!verify) {
         return res.status(401).json({ message: "invalid credentials password" })
     }
+    if (!result.active) {
+        return res.status(401).json({ message: "account blocked by admin" })
+    }
+
     const token = jwt.sign({ _id: result._id }, process.env.JWT_KEY, { expiresIn: "1d" })
     res.cookie("USER", token, { maxAge: 1000 * 60 * 60 * 24, secure: false, httpOnly: true })
     res.json({

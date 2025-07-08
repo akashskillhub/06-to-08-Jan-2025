@@ -6,83 +6,85 @@ export const adminApi = createApi({
     tagTypes: ["admin"],
     endpoints: (builder) => {
         return {
-            getUsers: builder.query({
+            getTodo: builder.query({
                 query: () => {
                     return {
-                        url: "/fetch",
+                        url: "/read-todo",
                         method: "GET"
                     }
                 },
                 providesTags: ["admin"]
             }),
-            addUser: builder.mutation({
-                query: userData => {
+            addTodo: builder.mutation({
+                query: todoData => {
                     return {
                         url: "/create-todo",
                         method: "POST",
-                        body: userData
+                        body: todoData
                     }
                 },
                 invalidatesTags: ["admin"]
             }),
-            updateUser: builder.mutation({
-                query: userData => {
+            updateTodo: builder.mutation({
+                query: todoData => {
                     return {
-                        url: "/update-todo/" + userData._tid,
+                        url: "/update-todo/" + todoData._tid,
                         method: "POST",
-                        body: userData
+                        body: todoData
                     }
                 },
                 invalidatesTags: ["admin"]
             }),
-            deleteUser: builder.mutation({
+            deleteTodo: builder.mutation({
                 query: tid => {
                     return {
                         url: "/delete-todo/" + _tid,
                         method: "POST",
-                        // body: userData
                     }
                 },
                 invalidatesTags: ["admin"]
             }),
-            getViewer: builder.query({
+            getUsers: builder.query({
                 query: () => {
                     return {
                         url: "/view-users",
                         method: "GET"
                     }
                 },
-                providesTags: ["admin"]
+                providesTags: ["user"]
             }),
-            activeViewer: builder.mutation({
+            activeUser: builder.mutation({
                 query: userData => {
                     return {
-                        url: "/activate-users",
-                        method: "POST",
+                        url: "/activate-user/" + userData._id,
+                        method: "PUT",
                         body: userData
                     }
                 },
-                invalidatesTags: ["admin"]
+                invalidatesTags: ["user"]
             }),
-            deactivateViewer: builder.mutation({
+            deactivateUser: builder.mutation({
                 query: userData => {
                     return {
-                        url: "/deactivate-users",
-                        method: "POST",
+                        url: "/deactivate-user/" + userData._id,
+                        method: "PUT",
                         body: userData
                     }
                 },
-                invalidatesTags: ["admin"]
+                invalidatesTags: ["user"]
             }),
 
         }
     }
 })
 
-export const { useGetUsersQuery,
-    useAddUserMutation,
-    useDeleteUserMutation,
-    useUpdateUserMutation,
-    useGetViewerQuery,
-    useActiveViewerMutation,
-    useDeactivateViewerMutation } = adminApi
+export const {
+    useGetTodoQuery,
+    useAddTodoMutation,
+    useUpdateTodoMutation,
+    useDeleteTodoMutation,
+
+    useGetUsersQuery,
+    useActiveUserMutation,
+    useDeactivateUserMutation
+} = adminApi

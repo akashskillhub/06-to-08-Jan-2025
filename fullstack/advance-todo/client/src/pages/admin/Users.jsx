@@ -7,8 +7,18 @@ import Loading from '../../share/Loading'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useCallback } from 'react'
+import { useActiveUserMutation, useDeactivateUserMutation, useGetUsersQuery } from '../../redux/Api/admin.api'
 
 const Users = () => {
+    const [activate, {
+        isSuccess: activateSuccess,
+        isLoading: activateIsLoading
+    }] = useActiveUserMutation()
+    const [deactivate, {
+        isSuccess: deactivateSuccess,
+        isLoading: deactivateIsLoading
+    }] = useDeactivateUserMutation()
+    const { data } = useGetUsersQuery()
     const [register, {
         isSuccess: registerSuccess,
         isLoading: registerIsLoading
@@ -46,8 +56,19 @@ const Users = () => {
             setPreview(null)
         }
     }, [registerSuccess])
+    useEffect(() => {
+        if (activateSuccess) {
+            toast.success("user account activate success")
+        }
+    }, [activateSuccess])
 
-    if (registerIsLoading) {
+    useEffect(() => {
+        if (deactivateSuccess) {
+            toast.error("user account de-activate success")
+        }
+    }, [deactivateSuccess])
+
+    if (registerIsLoading || activateIsLoading || deactivateIsLoading) {
         return <Loading />
     }
     return <div class="container">
@@ -108,6 +129,44 @@ const Users = () => {
                 </form>
             </div>
         </div>
+
+        {
+            data && <table class="table table-dark table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>photo</th>
+                        <th>active</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data.result.map(item => <tr
+                            className={item.active ? "table-success" : "table-danger"}
+                            key={item._id}>
+
+                            <td>{item.name}</td>
+                            <td>{item.email}</td>
+                            <td>
+                                <img src={item.photo} height={50} alt="" />
+                            </td>
+                            <td>{item.active ? "active" : "de-active"}</td>
+                            <td>
+                                {
+                                    item.active
+                                        ? <button onClick={e => deactivate({ _id: item._id, active: false })} type="button" class="btn mx-2 btn-outline-danger">de Activate</button>
+                                        : <button onClick={e => activate({ _id: item._id, active: true })} type="button" class="btn mx-2 btn-outline-success">Activate</button>
+                                }
+
+
+                            </td>
+                        </tr>)
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 }
 

@@ -1,23 +1,35 @@
-exports.createTodo = (req, res) => {
+const Todo = require("../models/Todo")
+const User = require("../models/User")
+
+exports.createTodo = async (req, res) => {
+    await Todo.create(req.body)
     res.json({ message: "admin create todo success" })
 }
-exports.readTodo = (req, res) => {
-    res.json({ message: "admin todo fetch success" })
+exports.readTodo = async (req, res) => {
+    const result = await Todo.find()
+    res.json({ message: "admin todo fetch success", result })
 }
-exports.updateTodo = (req, res) => {
+exports.updateTodo = async (req, res) => {
+    await Todo.findByIdAndUpdate(req.params.tid, req.body)
     res.json({ message: "admin todo update success" })
 }
-exports.deleteTodo = (req, res) => {
+exports.deleteTodo = async (req, res) => {
+    await Todo.findByIdAndDelete(req.params.tid)
     res.json({ message: "admin todo delete success" })
 }
 
-exports.viewUsers = (req, res) => {
-    res.json({ message: "admin user fetch success" })
+exports.viewUsers = async (req, res) => {
+    const result = await User.find()
+    res.json({ message: "admin user fetch success", result })
 }
-exports.activateUser = (req, res) => {
+exports.activateUser = async (req, res) => {
+    const { uid } = req.params
+    await User.findByIdAndUpdate(uid, req.body)
     res.json({ message: "admin user activate success" })
 }
-exports.deactivateUser = (req, res) => {
+exports.deactivateUser = async (req, res) => {
+    const { uid } = req.params
+    await User.findByIdAndUpdate(uid, req.body)
     res.json({ message: "admin user deactivate success" })
 }
 

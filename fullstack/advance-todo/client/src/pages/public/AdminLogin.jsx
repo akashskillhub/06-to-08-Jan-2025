@@ -1,8 +1,14 @@
 import { useFormik } from 'formik'
 import * as yup from "yup"
 import { handleClasses } from '../../share/handleClasses'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAdminloginMutation } from '../../redux/Api/auth.api'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import Loading from '../../share/Loading'
 const AdminLogin = () => {
+    const [login, { isSuccess, isLoading }] = useAdminloginMutation()
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -13,9 +19,21 @@ const AdminLogin = () => {
             password: yup.string().required(),
         }),
         onSubmit: (values, { resetForm }) => {
+            login(values)
             resetForm()
         }
     })
+
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success("admin login success")
+            navigate("/admin")
+        }
+    }, [isSuccess])
+
+    if (isLoading) {
+        return <Loading />
+    }
     return <>
         <div class="container">
             <div class="row">

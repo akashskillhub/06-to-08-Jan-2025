@@ -1,8 +1,15 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { handleClasses } from '../../share/handleClasses'
+import { useAddTodoMutation, useGetTodoQuery, useGetUsersQuery } from '../../redux/Api/admin.api'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import Loading from '../../share/Loading'
 
 const Todos = () => {
+    const { data } = useGetUsersQuery()
+    const { data: notes, } = useGetTodoQuery()
+    const [addTodo, { isSuccess: addSuccess, isLoading: addIsLoading }] = useAddTodoMutation()
     const formik = useFormik({
         initialValues: {
             auther: "",
@@ -17,9 +24,20 @@ const Todos = () => {
             priority: yup.string().required(),
         }),
         onSubmit: (values, { resetForm }) => {
+            addTodo(values)
             resetForm()
         }
     })
+
+    useEffect(() => {
+        if (addSuccess) {
+            toast.success("todo create success")
+        }
+    }, [addSuccess])
+
+    if (addIsLoading) {
+        return <Loading />
+    }
     return <>
         <div className="container">
             <div className="row">
@@ -29,11 +47,15 @@ const Todos = () => {
                         <div class="card-body">
                             <form onSubmit={formik.handleSubmit}>
                                 <div>
-                                    <select className={handleClasses(formik, "auther")}>
+                                    <select {...formik.getFieldProps("auther")} className={handleClasses(formik, "auther")}>
                                         <option selected>Choose User</option>
-                                        <option value="1">John Doe</option>
-                                        <option value="2">Ross Galler</option>
-                                        <option value="3">Rachel Green</option>
+                                        {
+                                            data && data.result
+                                                .filter(item => item.active)
+                                                .map(item => <option value={item._id}>
+                                                    {item.name}
+                                                </option>)
+                                        }
                                     </select>
                                 </div>
 
@@ -54,7 +76,7 @@ const Todos = () => {
                                 </div>
 
                                 <div>
-                                    <select className={handleClasses(formik, "priority")}>
+                                    <select {...formik.getFieldProps("priority")} className={handleClasses(formik, "priority")}>
                                         <option selected>Choose Priority</option>
                                         <option value="high">High</option>
                                         <option value="medium">Medium</option>
@@ -67,6 +89,36 @@ const Todos = () => {
                         </div>
                     </div>
                 </div>
+
+                {
+                    notes && <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>auther</th>
+                                <th>task</th>
+                                <th>desc</th>
+                                <th>priority</th>
+                                <th>complete</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                notes.result.map(item => <tr key={item._id}>
+                                    <td>{item.auther}</td>
+                                    <td>{item.task}</td>
+                                    <td>{item.desc}</td>
+                                    <td>{item.priority}</td>
+                                    <td>{item.complete ? "Complete" : "Pending"}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-outline-warning me-2">edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger">remove</button>
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                }
             </div>
         </div>
     </>

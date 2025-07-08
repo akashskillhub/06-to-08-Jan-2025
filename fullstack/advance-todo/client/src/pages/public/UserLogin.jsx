@@ -1,8 +1,14 @@
 import { useFormik } from 'formik'
 import * as yup from "yup"
 import { handleClasses } from '../../share/handleClasses'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUserloginMutation } from '../../redux/Api/auth.api'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import Loading from '../../share/Loading'
 const UserLogin = () => {
+    const navigate = useNavigate()
+    const [login, { isSuccess, isLoading, isError, error }] = useUserloginMutation()
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -13,9 +19,25 @@ const UserLogin = () => {
             password: yup.string().required(),
         }),
         onSubmit: (values, { resetForm }) => {
+            login(values)
             resetForm()
         }
     })
+    useEffect(() => {
+        if (isSuccess) {
+            toast.success("user login success")
+            navigate("/account")
+        }
+    }, [isSuccess])
+    useEffect(() => {
+        if (isError) {
+            toast.error(error.data.message ? error.data.message : "unable to login")
+            // console.log(error)
+        }
+    }, [isError])
+    if (isLoading) {
+        return <Loading />
+    }
     return <>
         <div class="container ">
             <div class="row">
