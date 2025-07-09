@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const userApi = createApi({
     reducerPath: "userapi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/user" }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "http://localhost:5000/api/user",
+        credentials: "include"
+    }),
     tagTypes: ["user"],
     endpoints: (builder) => {
         return {
@@ -18,8 +21,8 @@ export const userApi = createApi({
             complateTodo: builder.mutation({
                 query: userData => {
                     return {
-                        url: "/complate-todo",
-                        method: "POST",
+                        url: "/complete-todo/" + userData._id,
+                        method: "PUT",
                         body: userData
                     }
                 },

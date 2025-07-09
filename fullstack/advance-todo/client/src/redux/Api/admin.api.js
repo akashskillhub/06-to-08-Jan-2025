@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const adminApi = createApi({
     reducerPath: "adminapi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/admin" }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "http://localhost:5000/api/admin",
+        credentials: "include"
+    }),
     tagTypes: ["admin"],
     endpoints: (builder) => {
         return {
@@ -28,18 +31,18 @@ export const adminApi = createApi({
             updateTodo: builder.mutation({
                 query: todoData => {
                     return {
-                        url: "/update-todo/" + todoData._tid,
-                        method: "POST",
+                        url: "/update-todo/" + todoData._id,
+                        method: "PUT",
                         body: todoData
                     }
                 },
                 invalidatesTags: ["admin"]
             }),
             deleteTodo: builder.mutation({
-                query: tid => {
+                query: _id => {
                     return {
-                        url: "/delete-todo/" + _tid,
-                        method: "POST",
+                        url: "/delete-todo/" + _id,
+                        method: "DELETE",
                     }
                 },
                 invalidatesTags: ["admin"]

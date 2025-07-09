@@ -4,6 +4,6 @@ const router = require("express").Router()
 
 router
     .get("/todo", viewTodo)
-    .post("/complete-todo", completeTodo)
+    .put("/complete-todo/:tid", completeTodo)
 
 module.exports = router

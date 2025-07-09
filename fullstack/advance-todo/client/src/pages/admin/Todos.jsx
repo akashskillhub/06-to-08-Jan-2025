@@ -1,21 +1,26 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { handleClasses } from '../../share/handleClasses'
-import { useAddTodoMutation, useGetTodoQuery, useGetUsersQuery } from '../../redux/Api/admin.api'
+import { useAddTodoMutation, useDeleteTodoMutation, useGetTodoQuery, useGetUsersQuery, useUpdateTodoMutation } from '../../redux/Api/admin.api'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import Loading from '../../share/Loading'
+import { useState } from 'react'
 
 const Todos = () => {
+    const [selectedTodo, setSelectedTodo] = useState()
     const { data } = useGetUsersQuery()
     const { data: notes, } = useGetTodoQuery()
     const [addTodo, { isSuccess: addSuccess, isLoading: addIsLoading }] = useAddTodoMutation()
+    const [delelteTodo, { isSuccess: deleteSuccess, isLoading: deleteIsLoading }] = useDeleteTodoMutation()
+    const [updateTodo, { isSuccess: updateSuccess, isLoading: updateIsLoading }] = useUpdateTodoMutation()
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            auther: "",
-            task: "",
-            desc: "",
-            priority: "",
+            auther: selectedTodo ? selectedTodo.auther : "",
+            task: selectedTodo ? selectedTodo.task : "",
+            desc: selectedTodo ? selectedTodo.desc : "",
+            priority: selectedTodo ? selectedTodo.priority : "",
         },
         validationSchema: yup.object({
             auther: yup.string().required(),
@@ -24,7 +29,10 @@ const Todos = () => {
             priority: yup.string().required(),
         }),
         onSubmit: (values, { resetForm }) => {
-            addTodo(values)
+            selectedTodo
+                ? updateTodo({ ...values, _id: selectedTodo._id })
+                : addTodo(values)
+
             resetForm()
         }
     })
@@ -34,8 +42,18 @@ const Todos = () => {
             toast.success("todo create success")
         }
     }, [addSuccess])
+    useEffect(() => {
+        if (deleteSuccess) {
+            toast.success("todo remove success")
+        }
+    }, [deleteSuccess])
+    useEffect(() => {
+        if (updateSuccess) {
+            toast.success("todo update success")
+        }
+    }, [updateSuccess])
 
-    if (addIsLoading) {
+    if (addIsLoading || deleteIsLoading || updateIsLoading) {
         return <Loading />
     }
     return <>
@@ -84,7 +102,15 @@ const Todos = () => {
                                     </select>
                                     <span className="invalid-feedback">{formik.errors.priority}</span>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100 btn-lg">Add Todo</button>
+                                {
+                                    selectedTodo
+                                        ? <>
+                                            <button type="submit" class="btn btn-warning w-100 btn-lg">update Todo</button>
+                                            <button type="button" class="btn btn-secondary" onClick={e => setSelectedTodo(null)}>Cancel</button>
+                                        </>
+                                        : <button type="submit" class="btn btn-primary w-100 btn-lg">Add Todo</button>
+                                }
+
                             </form>
                         </div>
                     </div>
@@ -105,14 +131,14 @@ const Todos = () => {
                         <tbody>
                             {
                                 notes.result.map(item => <tr key={item._id}>
-                                    <td>{item.auther}</td>
+                                    <td>{item.auther.name}</td>
                                     <td>{item.task}</td>
                                     <td>{item.desc}</td>
                                     <td>{item.priority}</td>
                                     <td>{item.complete ? "Complete" : "Pending"}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-outline-warning me-2">edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">remove</button>
+                                        <button onClick={e => setSelectedTodo(item)} type="button" class="btn btn-sm btn-outline-warning me-2">edit</button>
+                                        <button onClick={e => delelteTodo(item._id)} type="button" class="btn btn-sm btn-outline-danger">remove</button>
                                     </td>
                                 </tr>)
                             }

@@ -6,7 +6,7 @@ exports.createTodo = async (req, res) => {
     res.json({ message: "admin create todo success" })
 }
 exports.readTodo = async (req, res) => {
-    const result = await Todo.find()
+    const result = await Todo.find().populate("auther", "name")
     res.json({ message: "admin todo fetch success", result })
 }
 exports.updateTodo = async (req, res) => {
